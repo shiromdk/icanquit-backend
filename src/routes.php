@@ -2,11 +2,14 @@
 //This file contains the routes the web app uses
 require 'functions.php';
 require 'videostream.php';
+require 'login.php';
+require 'verify.php';
 
 Flight::route('/', function()
 {
     Flight::render('index.php');
 });
+
 
 Flight::route('GET /management/documents', function(){
   $filepath = '../resources/json/documentList.json';
@@ -33,6 +36,12 @@ Flight::route('PUT /management/videos',function(){
 Flight::route('POST /management/videos', function()
 {
   upload_file(0);
+});
+
+Flight::route('GET /management/profiles', function(){
+  $filepath = '../resources/json/profiles.json';
+  $string   = file_get_contents($filepath);
+  echo $string;
 });
 
 Flight::route('GET /watch/@id', function($id){
